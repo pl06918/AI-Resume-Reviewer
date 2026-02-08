@@ -93,7 +93,9 @@ This app is for feedback assistance, not automated hiring decisions.
   - OpenAI API onboarding friction by separating ChatGPT subscription from Platform billing/key setup.
 
 ## Future Work
-- Build a domain-specific resume/JD dataset and add supervised evaluation pipeline
-- Add lightweight model fine-tuning for keyword extraction and scoring consistency
-- Compare API-only vs fine-tuned model using quantitative metrics and human review
-- Optimize inference cost/latency with caching and model routing strategies
+- Collect more sample resumes and job descriptions to improve result quality
+- Add clearer score breakdown (format score, keyword match score, impact score)
+- Support more export options (PDF report / shareable summary)
+- Improve keyword logic with simple NLP techniques and better ranking
+- Add basic analytics dashboard to track usage and user feedback
+- Train a small custom model later and compare it with the current API-based version.
