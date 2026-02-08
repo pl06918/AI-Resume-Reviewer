@@ -81,10 +81,16 @@ This app is for feedback assistance, not automated hiring decisions.
 - API-based approach provides consistent output quality without dataset preparation overhead
 - Lower implementation risk compared to training and deploying custom models in an early-stage product
 
-## Challenges & Fixes
-- Firebase Auth error (`auth/api-key-not-valid`): caused by malformed `.env.local` formatting. Fixed by restoring a single-line `NEXT_PUBLIC_FIREBASE_API_KEY=...` value and restarting the dev server.
-- OpenAI model parameter error (`Unsupported value: 'temperature'`): `gpt-5-mini` did not accept the custom value used in code. Fixed by removing the explicit `temperature` field.
-- OpenAI API setup friction: ChatGPT subscription and OpenAI API billing are separate. Resolved by creating/using the correct OpenAI Platform organization, enabling billing credits, and issuing a valid API key for `.env.local`.
+## Summary of Project Log
+- Initialized the web app with Next.js App Router and implemented core pages (`/`, `/login`, `/history`).
+- Integrated Firebase Auth (email/password) and Firestore to support login, per-user review storage, and history retrieval.
+- Added resume file handling with server-side extraction for `pdf/docx/txt/md` via `/api/extract`.
+- Implemented AI review endpoint `/api/review` with OpenAI `gpt-5-mini`, plus fallback heuristic logic when `OPENAI_API_KEY` is not provided.
+- Refined UI copy and readability (status messaging, keyword labeling, result-card scrolling, and AI output caution note).
+- Resolved major setup/runtime issues:
+  - Firebase `auth/api-key-not-valid` from malformed `.env.local` formatting.
+  - OpenAI `Unsupported value: 'temperature'` by removing unsupported parameter for `gpt-5-mini`.
+  - OpenAI API onboarding friction by separating ChatGPT subscription from Platform billing/key setup.
 
 ## Future Work
 - Build a domain-specific resume/JD dataset and add supervised evaluation pipeline
