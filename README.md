@@ -81,6 +81,11 @@ This app is for feedback assistance, not automated hiring decisions.
 - API-based approach provides consistent output quality without dataset preparation overhead
 - Lower implementation risk compared to training and deploying custom models in an early-stage product
 
+## Challenges & Fixes
+- Firebase Auth error (`auth/api-key-not-valid`): caused by malformed `.env.local` formatting. Fixed by restoring a single-line `NEXT_PUBLIC_FIREBASE_API_KEY=...` value and restarting the dev server.
+- OpenAI model parameter error (`Unsupported value: 'temperature'`): `gpt-5-mini` did not accept the custom value used in code. Fixed by removing the explicit `temperature` field.
+- OpenAI API setup friction: ChatGPT subscription and OpenAI API billing are separate. Resolved by creating/using the correct OpenAI Platform organization, enabling billing credits, and issuing a valid API key for `.env.local`.
+
 ## Future Work
 - Build a domain-specific resume/JD dataset and add supervised evaluation pipeline
 - Add lightweight model fine-tuning for keyword extraction and scoring consistency
