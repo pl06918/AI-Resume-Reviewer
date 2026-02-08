@@ -9,7 +9,7 @@
 ## Stack
 - Next.js (App Router)
 - Firebase Auth + Firestore
-- OpenAI `gpt-4o-mini`
+- OpenAI `gpt-5-mini`
 
 ## Features
 - Auth: email/password login

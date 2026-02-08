@@ -77,8 +77,7 @@ Required JSON fields:
 Resume:\n${resumeText.slice(0, 8000)}\n\nJob Description:\n${(jdText || "").slice(0, 4000)}`;
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-4o-mini",
-      temperature: 0.3,
+      model: "gpt-5-mini",
       response_format: { type: "json_object" },
       messages: [
         {

@@ -6,7 +6,7 @@ from typing import Optional
 from openai import OpenAI
 
 
-def generate_llm_feedback(resume_text: str, jd_text: str, model: str = "gpt-4o-mini") -> Optional[str]:
+def generate_llm_feedback(resume_text: str, jd_text: str, model: str = "gpt-5-mini") -> Optional[str]:
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         return None

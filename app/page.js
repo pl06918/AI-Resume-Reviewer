@@ -109,11 +109,11 @@ export default function HomePage() {
     }
   }
 
-  const tierStatus = useMemo(() => {
-    if (!result) return "Ready for Tier 2 demo";
-    if (result.overallScore >= 80) return "Strong candidate profile";
-    if (result.overallScore >= 65) return "Needs targeted improvements";
-    return "Significant revision needed";
+  const reviewStatus = useMemo(() => {
+    if (!result) return "Upload a resume and run review to see results.";
+    if (result.overallScore >= 80) return "High alignment with the target role.";
+    if (result.overallScore >= 65) return "Moderate alignment. Improve key sections.";
+    return "Low alignment. Major revision is recommended.";
   }, [result]);
 
   return (
@@ -121,7 +121,7 @@ export default function HomePage() {
       <div className="topbar">
         <div>
           <h1>AI Resume Reviewer</h1>
-          <p className="muted">Auth + Upload + OpenAI + Firestore History</p>
+          <p className="muted">Upload your resume and get instant AI feedback with actionable improvements.</p>
         </div>
         <div className="topbar-actions">
           <Link href="/history">
@@ -162,7 +162,7 @@ export default function HomePage() {
 
       <div className="card" style={{ marginTop: 14 }}>
         <p className="muted">Status</p>
-        <h3 style={{ marginTop: 4 }}>{tierStatus}</h3>
+        <h3 style={{ marginTop: 4 }}>{reviewStatus}</h3>
       </div>
 
       {result ? (
@@ -171,17 +171,20 @@ export default function HomePage() {
             <div className="kpi"><p>Overall</p><b>{result.overallScore}</b></div>
             <div className="kpi"><p>Strengths</p><b>{result.strengths.length}</b></div>
             <div className="kpi"><p>Improvements</p><b>{result.improvements.length}</b></div>
-            <div className="kpi"><p>Missing Keys</p><b>{result.missingKeywords.length}</b></div>
+            <div className="kpi"><p>Missing Keywords (Top 10)</p><b>{result.missingKeywords.length}</b></div>
           </div>
+          <p className="muted" style={{ marginTop: -4 }}>
+            Overall is an AI-generated estimate based on your resume and job description match.
+          </p>
 
           <div className="row two">
-            <div className="card">
+            <div className="card list-card">
               <h3>Strengths</h3>
               <ul className="list">
                 {result.strengths.map((item, idx) => <li key={`s-${idx}`}>{item}</li>)}
               </ul>
             </div>
-            <div className="card">
+            <div className="card list-card">
               <h3>Weaknesses</h3>
               <ul className="list">
                 {result.weaknesses.map((item, idx) => <li key={`w-${idx}`}>{item}</li>)}
@@ -190,13 +193,13 @@ export default function HomePage() {
           </div>
 
           <div className="row two">
-            <div className="card">
+            <div className="card list-card">
               <h3>Specific Improvements</h3>
               <ul className="list">
                 {result.improvements.map((item, idx) => <li key={`i-${idx}`}>{item}</li>)}
               </ul>
             </div>
-            <div className="card">
+            <div className="card list-card">
               <h3>Rewritten Bullet Examples</h3>
               <ul className="list">
                 {result.rewrittenBullets.map((item, idx) => <li key={`r-${idx}`}>{item}</li>)}
@@ -207,6 +210,9 @@ export default function HomePage() {
               </ul>
             </div>
           </div>
+          <p className="muted">
+            AI feedback may be imperfect. Verify key suggestions before finalizing your resume.
+          </p>
         </div>
       ) : null}
     </main>
