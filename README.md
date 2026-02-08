@@ -1,15 +1,12 @@
 # AI Resume Reviewer
 
-- Firebase Auth login/signup
-- Resume upload + text extraction + text input
-- OpenAI API review (no ML training)
-- Firestore save
-- Review history page
+## Team Members
+- Punghwa Lee
+- Mose Park
 
-## Stack
-- Next.js (App Router)
-- Firebase Auth + Firestore
-- OpenAI `gpt-5-mini`
+## Project Purpose
+This project helps students improve their resumes quickly.  
+Users upload a resume, paste a job description, and receive AI feedback with clear improvement suggestions.
 
 ## Features
 - Auth: email/password login
@@ -17,6 +14,23 @@
 - AI Review: strengths, weaknesses, improvements, rewritten bullets, missing keywords
 - DB: save every review to Firestore
 - History: view previous reviews
+
+## Tools Utilized
+- JavaScript
+- Next.js (App Router) + React
+- Firebase Authentication
+- Cloud Firestore
+- OpenAI API (`gpt-5-mini`)
+- `pdf-parse` (PDF text extraction)
+- `mammoth` (DOCX text extraction)
+- Custom CSS (`app/globals.css`)
+
+## Public Frameworks / APIs Credits
+- [OpenAI API](https://platform.openai.com/docs) for generative feedback
+- [Firebase Authentication](https://firebase.google.com/docs/auth) for login/signup
+- [Cloud Firestore](https://firebase.google.com/docs/firestore) for per-user data storage
+- [Next.js](https://nextjs.org/docs) and [React](https://react.dev/) for the web app framework
+- [pdf-parse](https://www.npmjs.com/package/pdf-parse) and [mammoth](https://www.npmjs.com/package/mammoth) for file parsing
 
 ## Quick Start
 
@@ -70,27 +84,18 @@ If key is missing, the API route returns a heuristic fallback response.
 3. Run review
 4. Show saved history page
 
-## Important Note
-This app is for feedback assistance, not automated hiring decisions.
+## Problems We Ran Into and How We Solved Them
+1. Firebase login error: `auth/api-key-not-valid`
+- Cause: malformed `.env.local` formatting
+- Fix: corrected key-value format and restarted the dev server
 
-## Current Scope
-- GPT API-based resume review only (no model training/fine-tuning)
-- Focus on stable end-to-end workflow: auth, review generation, database save, and history view
+2. OpenAI request error with GPT-5 mini: unsupported `temperature` value
+- Cause: model parameter mismatch
+- Fix: removed the explicit `temperature` setting from the API call
 
-## Why This Scope
-- API-based approach provides consistent output quality without dataset preparation overhead
-- Lower implementation risk compared to training and deploying custom models in an early-stage product
-
-## Summary of Project Log
-- Initialized the web app with Next.js App Router and implemented core pages (`/`, `/login`, `/history`).
-- Integrated Firebase Auth (email/password) and Firestore to support login, per-user review storage, and history retrieval.
-- Added resume file handling with server-side extraction for `pdf/docx/txt/md` via `/api/extract`.
-- Implemented AI review endpoint `/api/review` with OpenAI `gpt-5-mini`, plus fallback heuristic logic when `OPENAI_API_KEY` is not provided.
-- Refined UI copy and readability (status messaging, keyword labeling, result-card scrolling, and AI output caution note).
-- Resolved major setup/runtime issues:
-  - Firebase `auth/api-key-not-valid` from malformed `.env.local` formatting.
-  - OpenAI `Unsupported value: 'temperature'` by removing unsupported parameter for `gpt-5-mini`.
-  - OpenAI API onboarding friction by separating ChatGPT subscription from Platform billing/key setup.
+3. OpenAI API setup confusion
+- Cause: ChatGPT subscription and OpenAI API billing are separate
+- Fix: set up OpenAI Platform billing/credits and generated a valid API key
 
 ## Future Work
 - Collect more sample resumes and job descriptions to improve result quality
