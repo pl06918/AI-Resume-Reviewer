@@ -97,6 +97,13 @@ If key is missing, the API route returns a heuristic fallback response.
 - Cause: ChatGPT subscription and OpenAI API billing are separate
 - Fix: set up OpenAI Platform billing/credits and generated a valid API key
 
+## Summary of Project Log
+- Day 1: Set up core project structure with Next.js and built login + main review page.
+- Day 2: Connected Firebase Authentication and Firestore for user login and saved review history.
+- Day 2: Implemented file upload and extraction for PDF/DOCX/TXT/MD.
+- Day 3: Integrated OpenAI API (`gpt-5-mini`) and completed AI review output flow.
+- Final pass: Improved UI wording/readability, tested end-to-end flow, and finalized documentation.
+
 ## Future Work
 - Collect more sample resumes and job descriptions to improve result quality
 - Add clearer score breakdown (format score, keyword match score, impact score)
